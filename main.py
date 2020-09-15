@@ -1,6 +1,7 @@
 import curses
 import sys
 import time
+import signal
 
 from rotText import RotText
 from text import Text
@@ -8,14 +9,34 @@ from text import Text
 
 class Game:
     def __init__(self):
+        # setup control-c handling to terminate program
+        signal.signal(signal.SIGINT, self.signal_handler)
+
+        # init curses
         self.stdscr = curses.initscr()
         curses.noecho()
         curses.cbreak()
         self.stdscr.keypad(True)
 
-        # x and y store current cursor pos
-        self.x = 0
-        self.y = 0
+    # main game loop
+    def run(self):
+        # check that the terminal is the correct size
+        self.size_or_terminate()
+
+        # display the splash screens
+        self.splash_screen()
+        time.sleep(1)
+        self.splash_screen2()
+        time.sleep(1)
+
+        c = None
+
+        # run the game loop
+        while True:
+            c = self.stdscr.getch()
+            self.stdscr.addch(c)
+
+    ### splash screens ###
 
     def splash_screen(self):
         splash = Text(self.halfheight - 7, self.halfwidth - 20, self.stdscr)
@@ -60,6 +81,11 @@ class Game:
             print("Screen is wrong size (%dx%d): please resize to 100x26" % (x, y))
             self.exit()
 
+    # gracefully handles control-c and terminates
+    def signal_handler(self, sig, frame):
+        self.terminate()
+        self.exit()
+
     def terminate(self):
         curses.nocbreak()
         self.stdscr.keypad(False)
@@ -73,10 +99,7 @@ class Game:
 
 def main():
     game = Game()
-    game.size_or_terminate()
-    game.splash_screen()
-    time.sleep(1)
-    game.splash_screen2()
+    game.run()
     game.terminate()
 
 
