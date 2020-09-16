@@ -2,49 +2,48 @@ import time
 
 
 class RotText:
-    def __init__(self, filename, windowHeight, windowWidth, objectH, objectW):
+    def __init__(self, config, filename, objectW, objectH):
         self.xOffset = 0
         self.sleepTime = .03
 
-        self.wHeight = windowHeight
-        self.wWidth = windowWidth
+        self.wHeight = config.height
+        self.wWidth = config.width
         self.objH = objectH
-        self.objW = objectW - 1
+        self.objW = objectW
+        self.win = config.win
 
         # read file and put each line into self.text
         file = open(filename, 'r')
         self.text = file.readlines()
 
-    def display(self, window):
+    def display(self):
         offset = None
         lineNum = 0
 
-        window.clear()
+        self.win.clear()
 
         if self.wWidth - self.objW - self.xOffset < 0:
             offset = -(self.wWidth - self.objW - self.xOffset)
 
         # loop through each line of text
         for line in self.text:
-            # Start with the first line of text
-
-            # running off screen logic
+            # run off screen logic
             if offset is not None:
-                window.move(int(self.wHeight / 2) - int(self.objH / 2 + 1) + lineNum, 0)
+                self.win.move(int(self.wHeight / 2) - int(self.objH / 2 + 1) + lineNum, 0)
             else:
-                window.move(int(self.wHeight / 2) - int(self.objH / 2 + 1) + lineNum,
-                            self.wWidth - self.objW - self.xOffset)
+                self.win.move(int(self.wHeight / 2) - int(self.objH / 2 + 1) + lineNum,
+                              self.wWidth - self.objW - self.xOffset)
 
-            window.addstr(line[offset:])
+            self.win.addstr(line[offset:])
 
             lineNum += 1
 
-        window.refresh()
+        self.win.refresh()
         self.xOffset += 1
 
-    def move(self, window):
+    def move(self):
         for x in range(0, self.wWidth):
-            self.display(window)
+            self.display()
             time.sleep(self.sleepTime)
             if self.sleepTime > .01:
                 self.sleepTime -= .001

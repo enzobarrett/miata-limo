@@ -3,8 +3,9 @@ import sys
 import time
 import signal
 
-from rotText import RotText
-from text import Text
+from cursesHelpers.winConfig import WinConfig
+from textHelpers.rotText import RotText
+from textHelpers.text import Text
 
 
 class Game:
@@ -18,6 +19,15 @@ class Game:
         curses.cbreak()
         self.stdscr.keypad(True)
 
+        # make getch() non blocking
+        self.stdscr.nodelay(1)
+
+        # store window details
+        self.config = WinConfig()
+
+        # set window in config class
+        self.config.win = self.stdscr
+
     # main game loop
     def run(self):
         # check that the terminal is the correct size
@@ -25,7 +35,7 @@ class Game:
 
         # display the splash screens
         self.splash_screen()
-        time.sleep(1)
+        time.sleep(1.5)
         self.splash_screen2()
         time.sleep(1)
 
@@ -34,12 +44,12 @@ class Game:
         # run the game loop
         while True:
             c = self.stdscr.getch()
-            self.stdscr.addch(c)
+            self.stdscr.addstr(str(c))
 
     ### splash screens ###
 
     def splash_screen(self):
-        splash = Text(self.halfheight - 7, self.halfwidth - 20, self.stdscr)
+        splash = Text(self.config, 40, 12)
         splash.addstr(r" __  __ _       _                       ")
         splash.addstr(r"|  \/  (_)     | |                      ")
         splash.addstr(r"| \  / |_  __ _| |_ __ _                ")
@@ -55,8 +65,8 @@ class Game:
         self.refresh()
 
     def splash_screen2(self):
-        rotText = RotText("limo.txt", 26, 100, 8, 49)
-        rotText.move(self.stdscr)
+        rotText = RotText(self.config, "limo.txt", 49, 8)
+        rotText.move()
 
     ### curses helpers ###
 
@@ -70,10 +80,10 @@ class Game:
         y, x = self.stdscr.getmaxyx()
 
         # set some helper vars
-        self.height = y
-        self.width = x
-        self.halfheight = int(y / 2)
-        self.halfwidth = int(x / 2)
+        self.config.height = y
+        self.config.width = x
+        self.config.halfHeight = int(y / 2)
+        self.config.halfWidth = int(x / 2)
 
         # if screen is not the correct size, terminate
         if not (y == 26 and x == 100):
