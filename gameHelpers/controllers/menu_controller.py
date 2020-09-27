@@ -10,3 +10,6 @@ class MenuController:
             self.menu.next()
         elif c == curses.KEY_UP or c == curses.KEY_LEFT:
             self.menu.prev()
+
+    def render(self):
+        self.menu.render()
