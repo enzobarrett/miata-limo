@@ -4,8 +4,10 @@ import time
 import signal
 
 from cursesHelpers.winConfig import WinConfig
+from gameHelpers.menu import Menu
 from textHelpers.rotText import RotText
 from textHelpers.text import Text
+from gameHelpers.router import Router
 
 
 class Game:
@@ -28,6 +30,9 @@ class Game:
         # set window in config class
         self.config.win = self.stdscr
 
+        # init router
+        self.router = Router(self.config)
+
     # main game loop
     def run(self):
         # check that the terminal is the correct size
@@ -43,8 +48,17 @@ class Game:
 
         # run the game loop
         while True:
+            # start by clearing the screen
+            self.stdscr.clear()
+
+            # TODO: tick time that takes into consideration render time
+
+            # get char, pass to router
             c = self.stdscr.getch()
-            self.stdscr.addstr(str(c))
+            self.router.route(c)
+
+            # TODO: replace with non-hardcoded tick time
+            time.sleep(.125)
 
     ### splash screens ###
 
