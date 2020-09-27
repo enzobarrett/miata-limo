@@ -21,10 +21,10 @@ class TestMenu(unittest.TestCase):
     # width should be largest menu item + 2
     def test_width(self):
         self.menu = Menu(self.config, "12345", "123456", "1234567")
-        self.assertEqual(self.menu.width, 7 + 2)
+        self.assertEqual(self.menu.width, 7 + 4)
 
         self.menu = Menu(self.config, "123456", "123456789", "12")
-        self.assertEqual(self.menu.width, 9 + 2)
+        self.assertEqual(self.menu.width, 9 + 4)
 
     # height should be number of menu items * 2 + 2
     def test_height(self):
