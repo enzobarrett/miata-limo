@@ -30,13 +30,13 @@ class Game:
         # set window in config class
         self.config.win = self.stdscr
 
-        # init router
-        self.router = Router(self.config)
-
     # main game loop
     def run(self):
         # check that the terminal is the correct size
         self.size_or_terminate()
+
+        # init router now that we have config vars
+        self.router = Router(self.config)
 
         # display the splash screens
         self.splash_screen()
