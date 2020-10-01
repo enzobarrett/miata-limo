@@ -16,7 +16,7 @@ class Router:
         if c == curses.KEY_ENTER or c == 10 or c == 13:
             # before changing to gameplay, store gamemode from menu
             if self.state == 0:
-                self.gameMode = self.menuController.menu.currIndex
+                self.gameMode = self.menuController.selected()
             self.state += 1
 
         # if true, we are in the gamemode selection menu

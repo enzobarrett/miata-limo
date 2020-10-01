@@ -13,3 +13,6 @@ class MenuController:
 
     def render(self):
         self.menu.render()
+
+    def selected(self):
+        self.menu.currIndex
