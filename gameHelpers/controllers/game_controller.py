@@ -1,4 +1,4 @@
-from gameHelpers.urban_area import UrbanArea
+from gameHelpers.gameElements.urban_area import UrbanArea
 
 
 class GameController:

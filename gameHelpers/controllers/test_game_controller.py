@@ -2,7 +2,7 @@ import unittest
 
 from cursesHelpers.winConfig import WinConfig
 from gameHelpers.controllers.game_controller import GameController
-from gameHelpers.urban_area import UrbanArea
+from gameHelpers.gameElements.urban_area import UrbanArea
 
 
 class TestMenu(unittest.TestCase):
