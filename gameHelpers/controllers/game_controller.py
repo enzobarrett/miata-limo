@@ -3,7 +3,10 @@ from gameHelpers.urban_area import UrbanArea
 
 class GameController:
     def __init__(self, config):
-        self.urban1 = UrbanArea(config)
+        self.urbanAreas = []
+        self.urbanAreas.append(UrbanArea(config, 17, 0))
+        self.urbanAreas.append(UrbanArea(config, 2, 51))
 
     def render(self):
-        self.urban1.render()
+        for urbanArea in self.urbanAreas:
+            urbanArea.render()
