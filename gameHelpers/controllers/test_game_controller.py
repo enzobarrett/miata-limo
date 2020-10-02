@@ -11,7 +11,7 @@ class TestMenu(unittest.TestCase):
         self.controller = GameController(self.config)
 
     def test_initial_urban_area(self):
-        self.assertIsInstance(self.controller.urban1, UrbanArea)
+        self.assertIsInstance(self.controller.urbanAreas, list)
 
 
 if __name__ == '__main__':
