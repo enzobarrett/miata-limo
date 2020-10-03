@@ -1,5 +1,6 @@
 from gameHelpers.gameElements.bottom_divider import BottomDivider
 from gameHelpers.gameElements.center_divider import CenterDivider
+from gameHelpers.gameElements.top_divider import TopDivider
 from gameHelpers.gameElements.urban_area import UrbanArea
 
 
@@ -13,6 +14,7 @@ class GameController:
         # initialize the dividers
         self.divider = CenterDivider(config)
         self.bottomDivider = BottomDivider(config)
+        self.topDivider = TopDivider(config)
 
     def render(self):
         # render urban areas
@@ -22,3 +24,4 @@ class GameController:
         # render the dividers
         self.divider.render()
         self.bottomDivider.render()
+        self.topDivider.render()
