@@ -3,6 +3,7 @@ from gameHelpers.gameElements.center_divider import CenterDivider
 from gameHelpers.gameElements.rural_area import RuralArea
 from gameHelpers.gameElements.top_divider import TopDivider
 from gameHelpers.gameElements.urban_area import UrbanArea
+from gameHelpers.scanners.perimeter_entrance_scanner import PerimeterEntranceScanner
 
 
 class GameController:
@@ -22,6 +23,9 @@ class GameController:
         self.bottomDivider = BottomDivider(config)
         self.topDivider = TopDivider(config)
 
+        # initialize scanners
+        self.perimeterScanner = PerimeterEntranceScanner(config)
+
     def render(self):
         # render urban areas
         for urbanArea in self.urbanAreas:
@@ -35,3 +39,6 @@ class GameController:
         self.divider.render()
         self.bottomDivider.render()
         self.topDivider.render()
+
+        # scan scanners
+        self.perimeterScanner.scan()
