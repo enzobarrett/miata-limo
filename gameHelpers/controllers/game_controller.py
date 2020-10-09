@@ -1,3 +1,4 @@
+from gameHelpers.controllers.limo_controller import LimoController
 from gameHelpers.gameElements.bottom_divider import BottomDivider
 from gameHelpers.gameElements.center_divider import CenterDivider
 from gameHelpers.gameElements.rural_area import RuralArea
@@ -26,6 +27,9 @@ class GameController:
         # initialize scanners
         self.perimeterScanner = PerimeterEntranceScanner(config)
 
+        # limo controller
+        self.limoController = LimoController(config, self.perimeterScanner)
+
     def render(self):
         # render urban areas
         for urbanArea in self.urbanAreas:
@@ -42,3 +46,6 @@ class GameController:
 
         # scan scanners
         self.perimeterScanner.scan()
+
+        # limo
+        self.limoController.render()
