@@ -1,9 +1,10 @@
 class Limo:
     # TODO: add velocity
-    def __init__(self, config, y, x, ch):
+    # TODO: update constructor to take tuple cords
+    def __init__(self, config, cords, ch):
         self.win = config.win
-        self.x = x
-        self.y = y
+        self.x = cords[1]
+        self.y = cords[0]
         self.char = ch
 
     def render(self):

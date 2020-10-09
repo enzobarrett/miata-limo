@@ -7,7 +7,7 @@ from gameHelpers.gameElements.limo import Limo
 class TestLimo(unittest.TestCase):
     def setUp(self):
         self.config = WinConfig()
-        self.testLimo = Limo(self.config, 16, 12, '1')
+        self.testLimo = Limo(self.config, (16, 12), '1')
 
     # test config window init
     def test_config(self):
