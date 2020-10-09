@@ -12,8 +12,8 @@ class PerimeterEntranceScanner:
     def scan(self):
         yBottom = 24
         yTop = 1
-        xRight = 99
-        xLeft = 1
+        xRight = 98
+        xLeft = 0
 
         # scan horizontally
         for x in range(self.config.width):
