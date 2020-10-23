@@ -16,8 +16,15 @@ class LimoController:
         # store entranceScanner
         self.scanner = entranceScanner
 
+        # one limo should be spawned immediately
+        self.first = True
+
     # called every game tick, limos will be randomly generated
     def tick(self):
+        if self.first:
+            self.limos.append(Limo(self.config, random.choice(self.scanner.entrances), '1'))
+            self.first = False
+
         # TODO: generation frequency should depend on game level
         # maybe store level in WinConfig?
         if self.decision(ONE_IN_EIGHTY):
