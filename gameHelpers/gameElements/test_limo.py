@@ -25,6 +25,28 @@ class TestLimo(unittest.TestCase):
     def test_ch(self):
         self.assertEqual(self.testLimo.char, '1')
 
+    ### Test Velocity
+
+    # test pos x velocity
+    def test_pos_x_vel(self):
+        self.testLimo = Limo(self.config, (16, 0), '1')
+        self.assertEqual(self.testLimo.xVel, 1)
+
+    # test neg x velocity
+    def test_neg_x_vel(self):
+        self.testLimo = Limo(self.config, (16, 98), '1')
+        self.assertEqual(self.testLimo.xVel, -1)
+
+    # test pos y velocity
+    def test_pos_y_vel(self):
+        self.testLimo = Limo(self.config, (1, 14), '1')
+        self.assertEqual(self.testLimo.yVel, 1)
+
+    # test neg x velocity
+    def test_neg_y_vel(self):
+        self.testLimo = Limo(self.config, (24, 14), '1')
+        self.assertEqual(self.testLimo.yVel, -1)
+
 
 if __name__ == '__main__':
     unittest.main()
